@@ -441,6 +441,43 @@ button:active { transform:translate(1px,1px); }
 input:focus,textarea:focus,select:focus { outline:1px dotted #153b86; outline-offset:-4px; }
 @media(max-width:650px) { #desktop::before { display:none; } .message {max-width:96%;} }
 
+
+/* THEME STUDIO 2.0 — each theme changes the whole desktop, not just the wallpaper */
+:root { --theme-border:#77736b; --theme-light:#fff; --theme-dark:#45433f; --theme-muted:#5c5a55; --chat-bg:#f4f3ec; --chat-user:#dce9fb; }
+body { color:var(--ink); background:var(--desktop); }
+#desktop { background-color:var(--desktop); }
+.window { color:var(--ink); background:var(--window); border-color:var(--theme-light) var(--theme-dark) var(--theme-dark) var(--theme-light); border-radius:var(--radius); }
+.window-body { color:var(--ink); background:var(--window); }
+button { color:var(--ink); background:var(--button-face); border-color:var(--theme-light) var(--theme-dark) var(--theme-dark) var(--theme-light); border-radius:calc(var(--radius) + 1px); }
+input,textarea,select { color:var(--ink); background:var(--chat-bg); border-color:var(--theme-dark) var(--theme-light) var(--theme-light) var(--theme-dark); border-radius:var(--radius); }
+.panel,.game-card,.theme-card { color:var(--ink); background:var(--panel); border-color:var(--theme-light) var(--theme-dark) var(--theme-dark) var(--theme-light); border-radius:var(--radius); }
+.muted,.small.muted { color:var(--theme-muted); }
+#taskbar { color:var(--ink); background:linear-gradient(180deg,var(--theme-light),var(--window)); border-color:var(--theme-light); }
+#clock { color:var(--ink); background:var(--panel); border-color:var(--theme-dark) var(--theme-light) var(--theme-light) var(--theme-dark); }
+#startMenu { color:var(--ink); background:var(--window); border-color:var(--theme-light) var(--theme-dark) var(--theme-dark) var(--theme-light); }
+.start-banner { background:var(--title-active); }
+.start-item:hover { background:var(--accent); color:#fff; }
+#chatWindow .window-body { background:var(--window); }
+.chat-layout .toolbar { color:var(--ink); background:var(--panel); border-color:var(--theme-border); }
+#chatMessages { color:var(--ink); background:var(--chat-bg); border-color:var(--theme-dark) var(--theme-light) var(--theme-light) var(--theme-dark); }
+.message { color:var(--ink); background:var(--panel); border-color:var(--theme-border); border-radius:var(--radius); }
+.message.user { background:var(--chat-user); border-color:var(--accent); }
+.message .who { color:var(--accent); }
+.message.user .who { color:var(--accent); }
+.statusbar,.toolbar { color:var(--ink); background:var(--panel); border-color:var(--theme-border); }
+.theme-card { min-height:132px; transition:transform .14s,box-shadow .14s; }
+.theme-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.18); }
+.theme-card.selected { outline:3px solid var(--accent); outline-offset:1px; }
+.theme-swatch { border-radius:calc(var(--radius) + 2px); background-size:cover; box-shadow:inset 0 0 0 1px rgba(255,255,255,.25); }
+.result-box { color:var(--ink); background:var(--chat-bg); border-color:var(--theme-dark) var(--theme-light) var(--theme-light) var(--theme-dark); }
+#petBubble { color:#202020; border-radius:var(--radius); }
+[data-theme="cyber"] .window { box-shadow:0 12px 36px rgba(0,0,0,.38),0 0 0 1px rgba(58,218,255,.18); }
+[data-theme="cyber"] .titlebar { text-shadow:0 0 10px rgba(74,235,255,.45); }
+[data-theme="neon"] .window { box-shadow:0 12px 35px rgba(0,0,0,.4),0 0 0 1px rgba(255,114,210,.22); }
+[data-theme="neon"] .titlebar { text-shadow:0 0 9px rgba(255,140,225,.55); }
+[data-theme="candy"] .window { box-shadow:0 12px 30px rgba(86,59,110,.2); }
+[data-theme="candy"] .titlebar { text-shadow:0 1px 2px rgba(49,32,70,.4); }
+
 </style>
 </head>
 <body>
@@ -474,7 +511,7 @@ input:focus,textarea:focus,select:focus { outline:1px dotted #153b86; outline-of
           <textarea id="chatInput" placeholder="Ask APEX AI anything... (Enter to send, Shift+Enter for a new line)"></textarea>
           <button id="sendChat">Send ➤</button>
         </div>
-        <div class="small muted">REAL AI MODE • Ask anything. APEX can reason, explain, brainstorm, code, and search the web when needed.</div>
+        <div class="small muted">APEX HYBRID CORE • Multiple reasoning lenses • Learns from your feedback on this device</div>
       </div>
     </div>
     <div class="statusbar" id="chatStatus">Ready</div>
@@ -534,7 +571,7 @@ input:focus,textarea:focus,select:focus { outline:1px dotted #153b86; outline-of
   <section class="window" id="themesWindow" style="left:360px;top:90px;width:560px;height:450px;">
     <div class="titlebar"><span>🎨 Theme Studio</span><div class="controls"><button data-minimize>_</button><button data-maximize>□</button><button data-close>×</button></div></div>
     <div class="window-body">
-      <p>Choose a desktop style. The arcade collection changes with the selected theme.</p>
+      <p>Pick a complete desktop makeover. Colors, windows, chat panels, buttons, and the arcade vibe all change together.</p>
       <div id="themeGrid" class="theme-grid"></div>
       <hr>
       <label class="field-label" for="customColor">Custom desktop color</label>
@@ -606,10 +643,12 @@ input:focus,textarea:focus,select:focus { outline:1px dotted #153b86; outline-of
    The server should hold the secret key and call your model.
 */
 const APEX_CONFIG = {
-  chatEndpoint: "/api/chat",
-  inspectEndpoint: "/api/inspect",
+  // GitHub Pages is static hosting: keep API endpoints disabled here.
+  // Never place a private AI API key in this browser file.
+  chatEndpoint: "",
+  inspectEndpoint: "",
   requestTimeoutMs: 30000,
-  demoMode: false
+  demoMode: true
 };
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -639,34 +678,34 @@ const pets = {
 
 const themes = {
   classic: {
-    name: "Classic Windows",
-    desktop: "#008080",
-    title: "linear-gradient(90deg,#000080,#1084d0)",
-    games: ["Minesweeper", "Solitaire", "Snake", "Space Invaders", "Retro Racing"]
+    name: "Windows 98 Retro", subtitle: "The classic teal desktop, polished up", desktop: "#087d79",
+    wallpaper: "radial-gradient(ellipse at 52% 38%,rgba(255,255,255,.14),transparent 42%),repeating-linear-gradient(0deg,rgba(0,0,0,.025) 0 1px,transparent 1px 3px),linear-gradient(135deg,#087d79,#075b70 72%,#073f5a)",
+    title: "linear-gradient(90deg,#07145b 0%,#135bb0 58%,#36a5c7 100%)", window: "#c9c7c1", panel: "#e5e2da", ink: "#171717", button: "#c9c7c1", accent: "#153b86", border: "#77736b", light: "#fff", dark: "#45433f", chat: "#f4f3ec", user: "#dce9fb", muted: "#5c5a55", radius: "2px", games: ["Minesweeper", "Solitaire", "Snake", "Space Invaders", "Retro Racing"]
   },
   cyber: {
-    name: "3D Futuristic",
-    desktop: "#15152f",
-    title: "linear-gradient(90deg,#24105a,#00a8cc)",
-    games: ["Neon Runner", "3D Maze", "Space Shooter", "Robot Battle", "Laser Dodge"]
+    name: "Apex Neon Future", subtitle: "Glass panels and electric blue", desktop: "#101a35",
+    wallpaper: "radial-gradient(circle at 75% 18%,rgba(0,225,255,.22),transparent 28%),radial-gradient(circle at 20% 80%,rgba(126,75,255,.2),transparent 32%),linear-gradient(135deg,#101a35,#11102a 60%,#071d2b)",
+    title: "linear-gradient(100deg,#17245c,#087fbd 55%,#13c8c4)", window: "#202c46", panel: "#293953", ink: "#edf7ff", button: "#30425e", accent: "#27d7e4", border: "#55718d", light: "#91b9d1", dark: "#10192b", chat: "#121f36", user: "#183d59", muted: "#a9c0d2", radius: "9px", games: ["Neon Runner", "3D Maze", "Space Shooter", "Robot Battle", "Laser Dodge"]
   },
   fantasy: {
-    name: "Fantasy",
-    desktop: "#315c48",
-    title: "linear-gradient(90deg,#26452d,#9b6b35)",
-    games: ["Dragon Quest", "Dungeon Explorer", "Treasure Hunt", "Magic Puzzle", "Monster Adventure"]
+    name: "Enchanted Kingdom", subtitle: "Warm parchment and forest magic", desktop: "#244d3c",
+    wallpaper: "radial-gradient(ellipse at 70% 20%,rgba(244,205,125,.2),transparent 30%),radial-gradient(circle at 15% 85%,rgba(72,135,91,.4),transparent 32%),linear-gradient(135deg,#244d3c,#183a31 65%,#102b29)",
+    title: "linear-gradient(90deg,#263f32,#78603a 55%,#b28a4d)", window: "#ded4bd", panel: "#eee5d0", ink: "#302b20", button: "#d8c9a9", accent: "#526d45", border: "#8a795d", light: "#fff7e6", dark: "#5c4b37", chat: "#f6efdf", user: "#e5ead7", muted: "#756b58", radius: "7px", games: ["Dragon Quest", "Dungeon Explorer", "Treasure Hunt", "Magic Puzzle", "Monster Adventure"]
   },
   pixel: {
-    name: "Pixel World",
-    desktop: "#5b8f64",
-    title: "linear-gradient(90deg,#285b35,#9acb78)",
-    games: ["Pet Adventure", "Fishing", "Farming", "Platformer", "Bug Collector"]
+    name: "Pixel Garden", subtitle: "Soft greens and cozy 8-bit vibes", desktop: "#527b58",
+    wallpaper: "repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 3px,transparent 3px 6px),radial-gradient(circle at 75% 22%,rgba(230,255,190,.18),transparent 25%),linear-gradient(135deg,#527b58,#315b4b)",
+    title: "linear-gradient(90deg,#244a36,#568c54 58%,#a4c76b)", window: "#d5dfc8", panel: "#e9f0dc", ink: "#203226", button: "#c8d8b9", accent: "#3e7148", border: "#71866b", light: "#f8fff1", dark: "#3e5142", chat: "#f4f8ec", user: "#dcebd2", muted: "#61715f", radius: "3px", games: ["Pet Adventure", "Fishing", "Farming", "Platformer", "Bug Collector"]
   },
   neon: {
-    name: "Neon Dark",
-    desktop: "#171225",
-    title: "linear-gradient(90deg,#4b176e,#bd2cff)",
-    games: ["Cyber Snake", "Hacker Puzzle", "Neon Pong", "Gravity Runner", "Laser Dodge"]
+    name: "Synthwave Nights", subtitle: "Purple skies, pink glow, arcade energy", desktop: "#211333",
+    wallpaper: "linear-gradient(transparent 92%,rgba(255,80,210,.12) 93%),linear-gradient(90deg,transparent 92%,rgba(255,80,210,.12) 93%),radial-gradient(ellipse at 50% 5%,rgba(255,61,180,.28),transparent 35%),linear-gradient(145deg,#211333,#171b3c 58%,#31143e)",
+    title: "linear-gradient(90deg,#4a1c70,#a52d9d 58%,#f06b9b)", window: "#302642", panel: "#40334f", ink: "#fff0ff", button: "#4a3a5b", accent: "#ff72d2", border: "#80638e", light: "#cba9d5", dark: "#1b1428", chat: "#211b33", user: "#492a58", muted: "#d0b9d5", radius: "10px", games: ["Cyber Snake", "Hacker Puzzle", "Neon Pong", "Gravity Runner", "Laser Dodge"]
+  },
+  candy: {
+    name: "Candy Pop", subtitle: "Bright pastel colors and playful cards", desktop: "#a7c8e8",
+    wallpaper: "radial-gradient(circle at 18% 25%,rgba(255,255,255,.5),transparent 20%),radial-gradient(circle at 80% 75%,rgba(255,255,255,.35),transparent 24%),linear-gradient(135deg,#a7c8e8,#d9b8e8 55%,#f3c4d4)",
+    title: "linear-gradient(90deg,#5368ad,#a46fc1 55%,#e28cae)", window: "#f4eaf5", panel: "#fff5fb", ink: "#392b4a", button: "#ead9ef", accent: "#8a5caf", border: "#b99ac6", light: "#fff", dark: "#8b7196", chat: "#fffaff", user: "#e9e2fa", muted: "#806d8b", radius: "13px", games: ["Bubble Pop", "Pet Adventure", "Color Match", "Cloud Jumper", "Star Catcher"]
   }
 };
 
@@ -808,63 +847,77 @@ function addMessage(role, content) {
   state.chatHistory = state.chatHistory.slice(-40);
   saveSetting("chatHistory", state.chatHistory);
 }
+/*
+ * APEX HYBRID CORE (GitHub Pages edition)
+ * These are local reasoning lenses inspired by different assistant strengths,
+ * not separate live AI models. GitHub Pages cannot securely call private models.
+ * APEX combines the lenses and adjusts its response style from user feedback.
+ */
+const APEX_MIND_PROFILE = [
+  { name: "Planner", strength: "clear steps and structure", watchFor: "over-planning" },
+  { name: "Teacher", strength: "simple explanations and examples", watchFor: "over-explaining" },
+  { name: "Creator", strength: "fresh ideas and alternatives", watchFor: "being too imaginative" },
+  { name: "Skeptic", strength: "checking assumptions and edge cases", watchFor: "being too cautious" },
+  { name: "Builder", strength: "practical code and implementation", watchFor: "jumping into code too quickly" }
+];
+const APEX_ADAPT_KEY = "apexHybridAdaptation";
+function getApexAdaptation() {
+  try {
+    return JSON.parse(localStorage.getItem(APEX_ADAPT_KEY)) || { concise: false, simpler: false, verify: true, detail: false, corrections: 0 };
+  } catch (_) {
+    return { concise: false, simpler: false, verify: true, detail: false, corrections: 0 };
+  }
+}
+function saveApexAdaptation(profile) {
+  try { localStorage.setItem(APEX_ADAPT_KEY, JSON.stringify(profile)); } catch (_) {}
+}
+function learnFromFeedback(text) {
+  const t = text.toLowerCase();
+  const profile = getApexAdaptation();
+  let changed = false;
+  if (/\b(too long|shorter|be brief|less detail|stop yapping)\b/.test(t)) { profile.concise = true; profile.detail = false; changed = true; }
+  if (/\b(explain simpler|simpler|easy words|i don't get it|dont get it)\b/.test(t)) { profile.simpler = true; changed = true; }
+  if (/\b(more detail|go deeper|explain more|step by step)\b/.test(t)) { profile.detail = true; profile.concise = false; changed = true; }
+  if (/\b(that's wrong|thats wrong|you are wrong|you're wrong|incorrect|not true)\b/.test(t)) { profile.verify = true; profile.corrections = (profile.corrections || 0) + 1; changed = true; }
+  if (changed) saveApexAdaptation(profile);
+  return changed;
+}
 function localAssistantReply(prompt) {
   const text = prompt.toLowerCase();
-  if (/\b(hello|hi|hey)\b/.test(text)) {
-    return "Hey! I'm APEX AI. I can help with questions, code, math, games, and ideas. What shall we do?";
+  const profile = getApexAdaptation();
+  if (learnFromFeedback(prompt)) {
+    const updated = getApexAdaptation();
+    const habits = [updated.concise ? "shorter answers" : "balanced answers", updated.simpler ? "simpler explanations" : "normal explanations", updated.detail ? "more step-by-step detail" : "usual detail"];
+    return "Got it — I'm adjusting my approach on this device. I'll aim for " + habits.join(", ") + ". I'll also be more careful about checking claims when you point out a mistake. This is saved in this browser, not sent anywhere.";
   }
-  if (text.includes("who are you")) {
-    return "I'm APEX AI, your retro desktop assistant. Connect an AI backend to give me full model-powered intelligence.";
+  if (/\b(hello|hi|hey|yo|sup)\b/.test(text)) {
+    return "YOOO! I'm APEX. My Hybrid Core looks at problems through a Planner, Teacher, Creator, Skeptic, and Builder lens, then combines the useful parts. Tell me what we're tackling!";
   }
-  if (text.includes("html") || text.includes("javascript") || text.includes("code")) {
-    return "I can help plan and write code. Open Code Lab to run a JavaScript/HTML preview in a sandbox. For advanced code generation, connect the /api/chat endpoint to an AI model.";
+  if (text.includes("who are you") || text.includes("how do you work") || text.includes("multiple ai")) {
+    return "I'm APEX AI — one assistant with a multi-perspective design. I combine five reasoning styles: Planner (structure), Teacher (clarity), Creator (ideas), Skeptic (checks assumptions), and Builder (practical steps). I also adapt my response style when you tell me something is too long, too complicated, or incorrect. Important: on this GitHub-only version these are local strategies, not five separate live AI models. I don't pretend otherwise.";
+  }
+  if (text.includes("html") || text.includes("javascript") || text.includes("code") || text.includes("program")) {
+    const base = "Let's build it carefully. Builder lens: break the feature into small pieces and test each one. Skeptic lens: check edge cases and avoid exposing secrets. Planner lens: decide what should happen first, then implement it in Code Lab. I can help draft code, but this offline version can't run a full AI coding model.";
+    return profile.concise ? "Let's build it in small tested steps. I'll check edge cases and keep private keys out of browser code. What should the feature do?" : base;
   }
   if (text.includes("math") || /[0-9].*[+\-*/^].*[0-9]/.test(text)) {
-    return "Try the Calculator app for arithmetic. It safely parses basic math without executing arbitrary JavaScript.";
+    return "Teacher lens: I can explain a math method step by step. Skeptic lens: we should check the calculation rather than guess. Open Calculator for arithmetic, or send me the exact problem and I'll try to guide you with the tools available in this local version.";
   }
-  if (text.includes("pet")) {
-    return "Your desktop pet is waiting! Open Pet Center to choose a shark, turtle, bee, cat, axolotl, or dragon.";
-  }
-  if (text.includes("game")) {
-    return "Open APEX Arcade! The available game collection changes when you switch desktop themes. Snake is playable in this starter build.";
-  }
-  if (text.includes("website") || text.includes("url")) {
-    return "Open Web Scanner and enter a public URL. Full inspection needs a backend because browsers block many cross-site requests.";
-  }
-  return "I'm in local demo mode right now. I can show you around the desktop, run the calculator, preview HTML/JavaScript, play Snake, and change themes. I can help with questions, explanations, coding, math, writing, brainstorming, and web research when enabled.";
+  if (text.includes("pet")) return "Your desktop pet is ready! Planner lens says choose a pet; Creator lens says give it a fun personality. Open Pet Center to pick a shark, turtle, bee, cat, axolotl, or dragon.";
+  if (text.includes("game")) return "Arcade time! Open APEX Arcade. Snake is playable in this starter build, and you can change the desktop theme too.";
+  if (text.includes("website") || text.includes("url") || text.includes("search the web")) return "I can open websites through your browser, but this GitHub-only build can't reliably read every site's contents because of browser security restrictions. Skeptic lens reminder: I shouldn't claim I've searched a page if I haven't actually accessed it.";
+  if (text.includes("adapt") || text.includes("flaw") || text.includes("mistake")) return "That's part of my design: combine different approaches, then watch for their weak spots. The Skeptic lens checks assumptions, the Teacher lens checks clarity, the Planner avoids overcomplication, the Creator keeps ideas grounded, and the Builder checks whether a solution is practical. Tell me when I get something wrong or explain it badly, and I'll adjust my style in this browser.";
+  const styleNote = profile.concise ? " I'll keep it brief." : profile.simpler ? " I'll use simpler wording." : profile.detail ? " I'll break it into more steps." : "";
+  return "I want to help with that. My local Hybrid Core can organize an answer through planning, explanation, creativity, critical checking, and practical steps, but it doesn't have a live language model behind it on GitHub Pages. If you give me a specific task, I'll do my best with the features available here and be clear about limits." + styleNote;
 }
 async function askAssistant(prompt) {
   const status = $("#chatStatus");
   status.textContent = "Thinking…";
-  const history = state.chatHistory.slice(-30);
-  try {
-    if (!APEX_CONFIG.demoMode && APEX_CONFIG.chatEndpoint) {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), APEX_CONFIG.requestTimeoutMs);
-      const response = await fetch(APEX_CONFIG.chatEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: prompt, history }),
-        signal: controller.signal
-      });
-      clearTimeout(timeout);
-      if (!response.ok) throw new Error(`AI server returned ${response.status}`);
-      const data = await response.json();
-      const answer = data.reply || data.message || "The AI server returned an empty reply.";
-      addMessage("assistant", String(answer));
-      status.textContent = "Connected to AI service";
-      return;
-    }
-    await new Promise(resolve => setTimeout(resolve, 250));
-    addMessage("assistant", localAssistantReply(prompt));
-    status.textContent = "APEX AI";
-  } catch (error) {
-    const detail = location.protocol === "file:"
-      ? "You opened this HTML directly. Run the APEX AI server and open http://localhost:3000 instead."
-      : "The APEX server is not responding. Start server.js and make sure this page is being served by that same server.";
-    addMessage("assistant", `I cannot connect to the real AI yet. ${detail} Error: ${error.message}`);
-    status.textContent = "AI server not connected";
-  }
+  // GitHub Pages cannot run a private model server. This build deliberately
+  // uses local replies rather than exposing an API key in public JavaScript.
+  await new Promise(resolve => setTimeout(resolve, 250));
+  addMessage("assistant", localAssistantReply(prompt));
+  status.textContent = "HYBRID LOCAL CORE · GitHub Pages";
 }
 async function sendChat() {
   const input = $("#chatInput");
@@ -874,16 +927,8 @@ async function sendChat() {
   addMessage("user", prompt);
   await askAssistant(prompt);
 }
-async function checkAIConnection() {
-  const status = $("#chatStatus");
-  try {
-    const response = await fetch("/api/health", { headers: { "Accept": "application/json" } });
-    if (!response.ok) throw new Error("Server unavailable");
-    const data = await response.json();
-    status.textContent = data.ok ? "● REAL AI SERVER ONLINE" : "AI server unavailable";
-  } catch (_) {
-    status.textContent = location.protocol === "file:" ? "● OFFLINE — open through the APEX server" : "● AI SERVER OFFLINE — start server.js";
-  }
+function checkAIConnection() {
+  $("#chatStatus").textContent = "HYBRID LOCAL CORE · GitHub Pages";
 }
 function restoreChat() {
   const saved = Array.isArray(state.chatHistory) ? state.chatHistory : [];
@@ -1310,8 +1355,12 @@ function applyTheme(key) {
   const theme = themes[key];
   if (!theme) return;
   state.theme = key;
-  document.documentElement.style.setProperty("--desktop", theme.desktop);
-  document.documentElement.style.setProperty("--title-active", theme.title);
+  const root = document.documentElement;
+  root.dataset.theme = key;
+  const vars = { desktop: theme.desktop, "title-active": theme.title, window: theme.window, panel: theme.panel, ink: theme.ink, "button-face": theme.button, accent: theme.accent, "theme-border": theme.border, "theme-light": theme.light, "theme-dark": theme.dark, "chat-bg": theme.chat, "chat-user": theme.user, "theme-muted": theme.muted, radius: theme.radius };
+  Object.entries(vars).forEach(([name, value]) => root.style.setProperty(`--${name}`, value));
+  const desktop = document.getElementById("desktop");
+  if (desktop) desktop.style.backgroundImage = theme.wallpaper;
   $("#arcadeThemeName").textContent = `${theme.name} Arcade`;
   saveSetting("theme", key);
   renderArcade();
@@ -1325,13 +1374,17 @@ function renderThemeCards() {
     card.className = "theme-card";
     const swatch = document.createElement("div");
     swatch.className = "theme-swatch";
-    swatch.style.background = theme.desktop;
+    swatch.style.background = theme.wallpaper;
     const title = document.createElement("strong");
     title.textContent = theme.name;
     const description = document.createElement("div");
     description.className = "small muted";
-    description.textContent = `${theme.games.length} themed games`;
-    card.append(swatch, title, description);
+    description.textContent = theme.subtitle;
+    const gameCount = document.createElement("div");
+    gameCount.className = "small";
+    gameCount.textContent = `${theme.games.length} arcade picks`;
+    if (state.theme === key) card.classList.add("selected");
+    card.append(swatch, title, description, gameCount);
     card.addEventListener("click", () => applyTheme(key));
     grid.appendChild(card);
   });
