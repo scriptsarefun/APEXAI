@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#008080">
-<title>APEX — Computer Buddy</title>
+<title>APEX — Windows 7 Aero Buddy</title>
 <style>
 /* =========================================================
    APEX AI — Classic desktop skin
@@ -492,6 +492,45 @@ input,textarea,select { color:var(--ink); background:var(--chat-bg); border-colo
 [data-theme="neon"] .titlebar { text-shadow:0 0 9px rgba(255,140,225,.55); }
 [data-theme="candy"] .window { box-shadow:0 12px 30px rgba(86,59,110,.2); }
 [data-theme="candy"] .titlebar { text-shadow:0 1px 2px rgba(49,32,70,.4); }
+
+
+/* === APEX AERO MAX: Windows 7 browser + upgraded robot pet === */
+:root{--desktop:#236b9c;--window:#edf5fb;--window-light:#fff;--window-dark:#66849b;--ink:#18354a;--title:linear-gradient(#f8fcff,#a9cde7);--title-active:linear-gradient(#fff,#b9dcf4);--button-face:linear-gradient(#fff,#c9dfef);--panel:#eaf3f9;--accent:#267db5;--shadow:#163d5b;--radius:7px;--font:"Segoe UI",Tahoma,sans-serif}
+html,body{font-family:"Segoe UI",Tahoma,sans-serif!important;color:#18354a!important;background:#174d74!important}
+body{padding-top:48px;background:radial-gradient(ellipse at 50% 0%,#e5f6ff 0%,#78b5db 42%,#16496f 100%)!important}
+body:before{content:"◀   ▶   ↻     APEX  •  Computer Buddy                         https://apex.local/home";position:fixed;z-index:9998;inset:0 0 auto;height:42px;display:flex;align-items:center;padding:0 18px;color:#23445d;font:13px "Segoe UI",sans-serif;background:linear-gradient(#fff,#e5f3fc 45%,#b6d4e9);border-bottom:1px solid #7299b5;box-shadow:0 2px 8px #173c5a55;text-shadow:0 1px white}
+#desktop{height:calc(100vh - 83px);background:radial-gradient(ellipse at 50% 30%,#a8d8f3 0%,#4b9bc9 42%,#164b75 100%)!important;border-top:1px solid #fff}
+#desktop:after{content:"APEX  •  YOUR LITTLE CORNER OF THE INTERNET";position:absolute;right:25px;top:18px;color:#eaf8ffb8;font:600 10px "Segoe UI";letter-spacing:2px;text-shadow:0 1px 4px #123b59;pointer-events:none}
+.window{background:#eef6fc!important;border:1px solid #668ca8!important;border-radius:7px!important;box-shadow:0 0 0 1px #ffffffb5,0 12px 30px #092b45a6,inset 0 1px #fff!important;overflow:hidden}
+.titlebar{height:35px!important;min-height:35px!important;padding:5px 8px 5px 12px!important;color:#173b55!important;background:linear-gradient(#fff 0%,#e7f5ff 35%,#a9cde7 100%)!important;border-bottom:1px solid #7fa5c1;text-shadow:0 1px #fff;font-weight:600}
+.titlebar span{color:#173b55!important}.titlebar .controls button{width:27px;height:21px;margin-left:2px;border:1px solid #8aaac2!important;border-radius:3px!important;background:linear-gradient(#fff,#c6deef)!important;color:#183d56!important;box-shadow:inset 0 1px #fff,0 1px 2px #24465b33!important}.titlebar .controls button:last-child{color:white!important;background:linear-gradient(#f3b4ad,#c84940)!important;border-color:#a34b43!important;text-shadow:0 1px #82352e}
+.window-body{background:#f5f9fc!important;color:#18354a!important}
+button{color:#183b54!important;border:1px solid #8daec4!important;border-radius:4px!important;background:linear-gradient(#fff,#edf6fc 48%,#c7deef)!important;box-shadow:inset 0 1px #fff,0 1px 2px #173d5925;text-shadow:0 1px #fff;transition:filter .12s,box-shadow .12s}button:hover{filter:brightness(1.04);border-color:#4d9bc8!important;box-shadow:inset 0 1px #fff,0 0 6px #4d9bc855}button:active{background:linear-gradient(#bfd9eb,#eef8ff)!important}
+input,textarea,select{color:#18354a!important;background:#fff!important;border:1px solid #9bb7cb!important;border-radius:3px!important;box-shadow:inset 0 1px 3px #173d5920}
+#taskbar{height:35px!important;padding:3px 7px!important;background:linear-gradient(#e3f4ffdd,#83b1d0ed 42%,#234f73)!important;border-top:1px solid #fff!important;box-shadow:0 -2px 10px #092c47a0,inset 0 1px #ffffffa8!important;backdrop-filter:blur(12px)}
+#startButton{height:29px!important;min-width:88px;border-radius:16px!important;color:white!important;border:1px solid #43824b!important;background:radial-gradient(ellipse at 35% 20%,#b8f4a9,#43a84c 58%,#17652e)!important;text-shadow:0 1px 2px #174b2a;box-shadow:inset 0 1px 2px #fff,0 1px 3px #173a52!important}
+#startMenu{bottom:35px!important;background:linear-gradient(135deg,#f8fcff,#c2deef)!important;border:1px solid #739ab7!important;border-radius:8px 8px 0 0!important;box-shadow:0 0 0 1px #ffffffb5,0 9px 24px #061f35a6!important;color:#18354a!important}
+.start-item{color:#18354a!important;border-radius:4px!important}.start-item:hover{color:#fff!important;background:linear-gradient(#72bce8,#287eb8)!important}
+.desktop-icon{color:#fff!important;text-shadow:0 1px 4px #103957!important;border-radius:5px!important}.desktop-icon:hover{background:#b9e5ff35!important;border:1px solid #ffffff88!important}
+#chatMessages{background:#fff!important;border:1px solid #a8c0d1!important;border-radius:4px!important}.message{border:1px solid #c3d5e2!important;border-radius:9px!important;background:linear-gradient(#fff,#f0f7fc)!important;box-shadow:0 1px 3px #244c6618}.message.user{background:linear-gradient(#eaf6ff,#d6ebf9)!important;border-color:#9fc8e3!important}
+#pet{width:126px!important;height:157px!important;right:30px!important;bottom:13px!important;gap:3px!important;filter:drop-shadow(0 8px 5px #062c4c88)!important;animation:apexFloat 2.6s ease-in-out infinite!important;transform-origin:50% 90%}
+#pet:before{content:"";position:absolute;z-index:-1;width:145px;height:145px;bottom:0;border-radius:50%;background:radial-gradient(circle,#7eeaff55 0%,#52c9ff22 48%,transparent 72%);animation:apexAura 3s ease-in-out infinite}
+#pet .monitor{position:relative;width:94px!important;height:73px!important;padding:6px!important;border:5px solid #b9c9d5!important;border-radius:12px!important;background:linear-gradient(135deg,#344b60,#101c2a)!important;box-shadow:inset 0 0 0 2px #07121d,0 0 0 1px #f1fbff,0 0 16px #50dfff88!important}
+#pet .monitor:before{content:"";position:absolute;top:-15px;left:50%;width:5px;height:12px;transform:translateX(-50%);border-radius:4px 4px 0 0;background:linear-gradient(90deg,#9db7c8,#effaff,#6d8fa5)}
+#pet .monitor:after{content:"✦";position:absolute;top:-22px;left:calc(50% - 4px);font-size:11px;color:#8df4ff;text-shadow:0 0 8px #55dfff}
+#pet .screen{border-radius:5px!important;background:radial-gradient(ellipse at 50% 30%,#174f72,#071827 78%)!important;box-shadow:inset 0 0 14px #32cfff44;gap:12px!important}
+#pet .eye{width:12px!important;height:16px!important;background:linear-gradient(#c8ffff,#45dfff)!important;box-shadow:0 0 5px #a1faff,0 0 13px #27cfff!important;animation:apexBlink 4.5s infinite}
+#pet .mouth{width:23px!important;height:9px!important;border-bottom:3px solid #8cf5ff!important;filter:drop-shadow(0 0 4px #30dfff)}
+#pet .tear{background:#72e6ff!important;box-shadow:0 0 7px #55dfff}
+#pet .neck{width:17px!important;height:10px!important;border-radius:3px;background:linear-gradient(90deg,#647f94,#e3f5ff,#718fa3)!important;box-shadow:0 1px 4px #082b44}
+#pet .body{width:67px!important;height:48px!important;border:3px solid #5e788d!important;border-radius:9px 9px 8px 8px!important;background:linear-gradient(90deg,#718da2,#e4f3fb 48%,#7e9bad)!important;box-shadow:inset 0 2px 4px #fff,0 3px 7px #092b44aa!important}
+#pet .body:after{content:"APEX"!important;top:12px!important;left:17px!important;font:bold 10px "Segoe UI"!important;color:#12648a!important;letter-spacing:1px;text-shadow:0 0 5px #6deaff}
+#pet .body:before{content:"";position:absolute;left:27px;bottom:5px;width:8px;height:5px;border-radius:4px;background:#4ee7ff;box-shadow:0 0 8px #27cfff}
+#pet .arm{top:8px!important;width:12px!important;height:29px!important;border:2px solid #607e94!important;border-radius:6px!important;background:linear-gradient(90deg,#829eb2,#e3f5ff,#7895a9)!important;box-shadow:0 1px 3px #123b55}
+#pet .arm.left{left:-14px!important}#pet .arm.right{right:-14px!important}
+#petBubble{right:112px!important;bottom:65px!important;max-width:210px!important;padding:9px 12px!important;border:1px solid #7fa9c6!important;border-radius:10px!important;background:linear-gradient(#fff,#e7f4fc)!important;box-shadow:0 5px 15px #092b4444!important;color:#183b54!important}
+@keyframes apexFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}@keyframes apexAura{0%,100%{opacity:.55;transform:scale(.94)}50%{opacity:1;transform:scale(1.08)}}@keyframes apexBlink{0%,45%,49%,100%{transform:scaleY(1)}47%{transform:scaleY(.12)}}
+@media(max-width:650px){body{padding-top:43px}body:before{height:38px;font-size:11px;padding:0 8px}#desktop{height:calc(100vh - 77px)}#pet{transform:scale(.82);transform-origin:bottom right;right:10px!important}}
 
 </style>
 </head>
