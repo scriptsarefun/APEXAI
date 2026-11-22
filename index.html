@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#008080">
-<title>APEX AI — Retro Desktop</title>
+<title>APEX — Computer Buddy</title>
 <style>
 /* =========================================================
    APEX AI — Classic desktop skin
@@ -291,6 +291,21 @@ a { color: #0000aa; }
   filter: drop-shadow(2px 3px 1px rgba(0,0,0,.35));
   animation: petBob 2s ease-in-out infinite;
 }
+#pet { width: 92px; height: 116px; right: 26px; bottom: 14px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:3px; font-size: initial; filter:drop-shadow(2px 4px 2px rgba(0,0,0,.35)); }
+#pet .monitor { width:76px; height:58px; background:#30343b; border:4px solid #c7cbd1; border-radius:7px; padding:5px; box-shadow:inset 0 0 0 2px #111; position:relative; }
+#pet .screen { height:100%; border-radius:3px; background:linear-gradient(145deg,#102a46,#071522); display:flex; align-items:center; justify-content:center; gap:8px; position:relative; overflow:hidden; }
+#pet .eye { width:10px; height:13px; border-radius:50%; background:#63eaff; box-shadow:0 0 8px #39dfff; }
+#pet .mouth { position:absolute; width:19px; height:8px; border-bottom:3px solid #63eaff; border-radius:50%; bottom:5px; }
+#pet .tear { display:none; position:absolute; width:5px; height:10px; border-radius:50% 50% 60% 60%; background:#57caff; top:23px; left:17px; }
+#pet.crying .tear { display:block; animation:tearDrop .65s infinite alternate; }
+#pet.crying .mouth { border-bottom:0; border-top:3px solid #63eaff; bottom:3px; }
+#pet .neck { width:12px; height:8px; background:#9299a3; }
+#pet .body { width:49px; height:37px; background:linear-gradient(90deg,#9299a3,#d8dce1,#858c96); border:3px solid #555d67; border-radius:7px 7px 5px 5px; position:relative; }
+#pet .body:after { content:'APEX'; position:absolute; font:bold 8px Tahoma; color:#172d43; top:10px; left:12px; }
+#pet .arm { position:absolute; top:7px; width:8px; height:23px; background:#aeb4bd; border:2px solid #626a74; border-radius:5px; }
+#pet .arm.left { left:-10px; transform:rotate(12deg); } #pet .arm.right { right:-10px; transform:rotate(-12deg); }
+@keyframes tearDrop { to { transform:translateY(7px); opacity:.35; } }
+#rpsResult { min-height:34px; padding:7px; background:#eee; border:1px inset #999; }
 @keyframes petBob {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-7px); }
@@ -481,7 +496,7 @@ input,textarea,select { color:var(--ink); background:var(--chat-bg); border-colo
 </style>
 </head>
 <body>
-<div id="desktop" aria-label="APEX AI desktop">
+<div id="desktop" aria-label="APEX computer buddy desktop">
   <div class="desktop-icons">
     <button class="desktop-icon" data-open="chatWindow"><span class="glyph">🤖</span><span>APEX AI</span></button>
     <button class="desktop-icon" data-open="codeWindow"><span class="glyph">💻</span><span>Code Lab</span></button>
@@ -493,7 +508,10 @@ input,textarea,select { color:var(--ink); background:var(--chat-bg); border-colo
     <button class="desktop-icon" data-open="rulesWindow"><span class="glyph">🛡️</span><span>AI Rules</span></button>
   </div>
 
-  <div id="pet" title="Click your pet!">🦈</div>
+  <div id="pet" title="Click APEX to cheer him up!" aria-label="APEX robot pet">
+    <div class="monitor"><div class="screen"><span class="eye"></span><span class="eye"></span><span class="tear"></span><span class="mouth"></span></div></div>
+    <div class="neck"></div><div class="body"><span class="arm left"></span><span class="arm right"></span></div>
+  </div>
   <div id="petBubble">Hi! I'm your desktop pet!</div>
 
   <section class="window" id="chatWindow" style="left:105px;top:30px;">
@@ -589,7 +607,11 @@ input,textarea,select { color:var(--ink); background:var(--chat-bg); border-colo
       <div class="panel">
         <div class="row"><strong id="petName">Baby Shark</strong><span class="grow"></span><span id="petMood">😊 Happy</span></div>
         <p id="petDescription">A curious little shark who loves bubbles.</p>
-        <div class="row"><button id="feedPet">🍎 Feed</button><button id="playPet">🎾 Play</button><button id="renamePet">✏️ Rename</button></div>
+        <div class="row"><button id="feedPet">🔋 Recharge</button><button id="playPet">🎮 Play</button><button id="renamePet">✏️ Rename</button></div>
+        <hr><h3>✊ Rock Paper Scissors with APEX</h3>
+        <div class="row"><button data-rps="rock">✊ Rock</button><button data-rps="paper">✋ Paper</button><button data-rps="scissors">✌️ Scissors</button></div>
+        <div id="rpsResult">Pick one and challenge APEX!</div>
+        <p class="small muted">APEX has pretend feelings and expressions — he's a playful computer pet.</p>
       </div>
     </div>
     <div class="statusbar">Your pet stays on the desktop while you work.</div>
@@ -668,7 +690,7 @@ const state = {
 };
 
 const pets = {
-  shark: { emoji: "🦈", name: "Baby Shark", description: "A curious little shark who loves bubbles.", line: "Chomp chomp! Let's explore!" },
+  shark: { emoji: "🤖", name: "APEX", description: "A blocky little computer-human robot with a monitor head, expressive face, and a huge sense of humor.", line: "BEEP BOOP! Best buddies mode: ON!" },
   turtle: { emoji: "🐢", name: "Shelly", description: "A calm turtle who enjoys slow adventures.", line: "Slow and steady wins!" },
   bee: { emoji: "🐝", name: "Buzz", description: "A busy bee who loves collecting flowers.", line: "Bzzzz! Let's make something sweet!" },
   cat: { emoji: "🐱", name: "Pixel", description: "A playful pixel cat who naps between projects.", line: "Meow! Need a coding buddy?" },
@@ -1524,7 +1546,7 @@ function selectPet(key) {
   if (!pets[key]) return;
   state.pet = key;
   const pet = pets[key];
-  $("#pet").textContent = pet.emoji;
+  $("#pet").classList.remove("crying");
   $("#petName").textContent = state.petName && state.pet !== "shark" ? state.petName : pet.name;
   $("#petDescription").textContent = pet.description;
   saveSetting("pet", key);
@@ -1553,17 +1575,20 @@ function initPets() {
   selectPet(pets[savedPet] ? savedPet : "shark");
   $("#pet").addEventListener("click", () => {
     state.happiness = Math.min(100, state.happiness + 5);
-    petSay(pets[state.pet].line);
-    $("#petMood").textContent = state.happiness > 60 ? "😊 Happy" : "😐 Okay";
+    $("#pet").classList.remove("crying");
+    $("#petMood").textContent = "🥹 Happy";
+    petSay("BOOP! I love being your buddy!");
   });
   $("#feedPet").addEventListener("click", () => {
     state.hunger = Math.max(0, state.hunger - 20);
     state.happiness = Math.min(100, state.happiness + 4);
-    petSay("Yummy! Thank you!");
+    $("#pet").classList.remove("crying");
+    petSay("BZZT! Battery recharged! Thank you!");
   });
   $("#playPet").addEventListener("click", () => {
     state.happiness = Math.min(100, state.happiness + 10);
-    petSay("That was fun! Again?");
+    $("#pet").classList.remove("crying");
+    petSay("WOOHOO! LET'S PLAY AGAIN!");
     $("#petMood").textContent = "🤩 Excited";
   });
   $("#renamePet").addEventListener("click", () => {
@@ -1574,6 +1599,19 @@ function initPets() {
     saveSetting("petName", state.petName);
   });
   state.petName = loadSetting("petName", "");
+  const choices = ["rock", "paper", "scissors"];
+  $$('[data-rps]').forEach(button => button.addEventListener("click", () => {
+    const user = button.dataset.rps;
+    const apex = choices[Math.floor(Math.random() * choices.length)];
+    const outcome = user === apex ? "It's a tie!" :
+      ((user === "rock" && apex === "scissors") || (user === "paper" && apex === "rock") || (user === "scissors" && apex === "paper")) ? "YOU WIN! APEX is impressed!" : "APEX wins! BEEP BOOP!";
+    $("#rpsResult").textContent = `You: ${user} · APEX: ${apex} — ${outcome}`;
+    if (outcome.startsWith("YOU WIN")) { $("#petMood").textContent = "🤩 Amazed"; petSay("WHAAAT?! You got me! 😄"); }
+    else if (outcome.startsWith("APEX")) { $("#petMood").textContent = "😎 Proud"; petSay("ROBOT SKILLS! I win this round!"); }
+    else { $("#petMood").textContent = "😄 Playful"; petSay("TWIN BRAIN CELLS! Tie game!"); }
+  }));
+  // Silly jokes can make APEX pretend-cry; clicking him cheers him up.
+  window.apexMakeCry = () => { $("#pet").classList.add("crying"); $("#petMood").textContent = "😭 Dramatic"; petSay("You called my joke lame?! *tiny robot sob* 😭"); };
 }
 
 /* =========================================================
